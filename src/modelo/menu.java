@@ -55,12 +55,9 @@ public class menu {
 					Archivo = crearArchivo();
 					System.out.println(Archivo.getNombre());
 					System.out.println(Archivo.getFecha());
-					System.out.println(Archivo.getContenido());
+					System.out.println(Archivo.getContenido().toString());
 			        System.out.println("\r\n"); 
-					
-					
-					break;
-					
+										
 				case 7: 
 					System.out.println("Finalizado");
 					break;
@@ -84,9 +81,9 @@ public class menu {
 	        a1.setNombre(input.nextLine());	        
 	        a1.obtenerFecha();	        
 	        System.out.println("Introduce el contenido (usar saltos de linea):");
-	        a1.setContenido(input.nextLine());
-	           
+	        a1.setContenido(input.nextLine());	           
 	        return a1;
+	        
 	   }
 	    
 
