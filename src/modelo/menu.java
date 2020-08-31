@@ -1,12 +1,13 @@
 package modelo;
 
 import java.util.Scanner;
+import java.util.LinkedList;
 
 public class menu {
 	//Sacanner sirve para recoger texto por consola
 	static Scanner input = new Scanner(System.in); 
 	static int seleccion = -1; //opción elegida del usuario
-	static archivo Archivo;
+	static LinkedList<archivo> Archivos = new LinkedList<archivo>();
 	
 	
 	public static void main(String[] args) {
@@ -52,11 +53,8 @@ public class menu {
 					break;
 					
 				case 6: 
-					Archivo = crearArchivo();
-					System.out.println(Archivo.getNombre());
-					System.out.println(Archivo.getFecha());
-					System.out.println(Archivo.getContenido().toString());
-			        System.out.println("\r\n"); 
+					Archivos.add (archivo.crearArchivo());
+					printArchivos (Archivos);
 										
 				case 7: 
 					System.out.println("Finalizado");
@@ -75,15 +73,17 @@ public class menu {
 	}
 	
 	
-	   public static archivo crearArchivo(){
-		    archivo a1 = new archivo();
-		    System.out.println("Introduce el nombre del archivo:");
-	        a1.setNombre(input.nextLine());	        
-	        a1.obtenerFecha();	        
-	        System.out.println("Introduce el contenido (usar saltos de linea):");
-	        a1.setContenido(input.nextLine());	           
-	        return a1;
-	        
+	 
+	   
+	   public static void printArchivos (LinkedList<archivo> Lista) {
+		   
+		   for(int i=0;i < Lista.size();i++) {
+			    System.out.println("\r\n------------------------------------");
+			    System.out.println(Lista.get(i).getNombre());
+				System.out.println(Lista.get(i).getFecha());
+				System.out.println(Lista.get(i).getContenido().toString());
+		   }
+		   System.out.println("------------------------------------\r\n");
 	   }
 	    
 

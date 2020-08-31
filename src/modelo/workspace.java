@@ -1,5 +1,5 @@
 package modelo;
 
-public class workspace {
+public class workspace extends repository{
 
 }

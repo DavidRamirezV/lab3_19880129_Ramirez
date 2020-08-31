@@ -1,5 +1,5 @@
 package modelo;
 
-public class index {
+public class index extends repository{
 
 }
