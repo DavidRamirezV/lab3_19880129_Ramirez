@@ -1,13 +1,17 @@
 package modelo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class repository {
 	private String rama;
 	private String autor;
 	private String fecha;
-	
-	LinkedList<archivo> Workspace;
+	static Scanner input = new Scanner(System.in); 
+
+	LinkedList<archivo> Archivos;
 	LinkedList<commit> RemoteRepository;
 	
 	public String getRama() {
@@ -29,6 +33,7 @@ public class repository {
 		this.rama = rama;
 	}
 	
+	
 	/*
 	 LinkedList<String> ll 
      = new LinkedList<String>(); 
@@ -48,5 +53,22 @@ public class repository {
 	 ll.removeLast(); 
 	
 */
+    public void obtenerFecha(){
+        SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        Date fecha = new Date();
+        this.fecha = formato.format(fecha);
+    }
+    
+    public static repository gitInit(){
+	    repository rep = new repository();
+	    System.out.println("Introduce el nombre del autor del repositorio:");
+        rep.setAutor(input.nextLine());	        
+        rep.obtenerFecha();      
+        System.out.println("Introduce la rama actual:");
+        rep.setRama(input.nextLine());	           
+        return rep;      	
+   }
+	
+	
 	 
 }

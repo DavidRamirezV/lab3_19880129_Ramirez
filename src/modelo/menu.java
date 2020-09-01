@@ -8,10 +8,11 @@ public class menu {
 	static Scanner input = new Scanner(System.in); 
 	static int seleccion = -1; //opción elegida del usuario
 	static LinkedList<archivo> Archivos = new LinkedList<archivo>();
-	
+	static repository repositorio = new repository();
 	
 	public static void main(String[] args) {
 		
+		repositorio = repository.gitInit();
 		//Mientras la opción elegida sea 0, preguntamos al usuario
 		while(seleccion != 7){
 			//Try catch para evitar que el programa termine si hay un error
@@ -34,6 +35,7 @@ public class menu {
 				
 				case 1: 
 					System.out.println("Aqui va gitAdd");
+					
 					break;
 					
 				case 2: 

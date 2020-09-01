@@ -1,5 +1,8 @@
 package modelo;
 
-public class index extends repository{
+import java.util.LinkedList;
 
+public class index extends repository{
+	LinkedList<archivo> index;
+	
 }
