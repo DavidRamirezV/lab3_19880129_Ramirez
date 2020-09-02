@@ -1,15 +1,14 @@
 package modelo;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class workspace extends repository{
-	LinkedList<archivo> workspace;
 	
-	
-	public LinkedList<archivo> gitAdd (LinkedList<String> nombreArchivos, LinkedList<archivo> workspace) {
+	public static LinkedList<archivo> gitAdd (List<String> nombreArchivos, LinkedList<archivo> workspace) {
 		LinkedList<archivo> coincidencias= new LinkedList<archivo>() ; 
 		
-		//si la lista es vacia agregar todo
+		//si se quiere agregar todo (all)
 		if (nombreArchivos.isEmpty()) {
 			for(int i=0;i < workspace.size();i++) {
 				coincidencias.add(workspace.get(i));		

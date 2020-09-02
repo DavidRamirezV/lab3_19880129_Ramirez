@@ -1,7 +1,10 @@
 package modelo;
 
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class menu {
 	//Sacanner sirve para recoger texto por consola
@@ -17,6 +20,7 @@ public class menu {
 		while(seleccion != 7){
 			//Try catch para evitar que el programa termine si hay un error
 			try{
+				
 				System.out.println(
 						"### SIMULACIÓN DE GIT ###\r\n" +
 						"1. add\r\n" + 
@@ -33,9 +37,15 @@ public class menu {
 				//Ejemplo de switch case en Java
 				switch(seleccion){
 				
-				case 1: 
-					System.out.println("Aqui va gitAdd");
-					
+				case 1:
+					System.out.println("Seleccionaste add, escribe \"all\" (sin comillas) para añadir todo");	
+					System.out.println("o ingresa el nombre de los archivos separados por una coma (sin espacios)");
+					System.out.println("Ej: \"all\" o \"archivo1.txt,archivo2.in,archivo3.out\" ");	
+					List<String> nombresArchivos = new ArrayList<String>(Arrays.asList(input.nextLine().split(",")));
+					for(int i=0;i < nombresArchivos.size();i++) {
+						System.out.println(nombresArchivos.get(i));		
+					}
+					repositorio.setIndex(workspace.gitAdd(nombresArchivos, repositorio.getWorkspace()) );
 					break;
 					
 				case 2: 
@@ -51,12 +61,36 @@ public class menu {
 					break;
 					
 				case 5: 
-					System.out.println("Aqui va status");
+					status.gitStatus(repositorio);
 					break;
 					
 				case 6: 
-					Archivos.add (archivo.crearArchivo());
+					archivo auxiliar = archivo.crearArchivo();
+					//para evitar que existan dos archivos con el mismo nombre
+					if (Archivos.size()==0) {
+						Archivos.add (auxiliar);
+					}
+					
+					else {
+						for(int i=0;i < Archivos.size();i++) {
+							if (auxiliar.getNombre().equals(Archivos.get(i).getNombre())) {
+								System.out.println("estoy en el if");
+								Archivos.set(i,auxiliar);
+								break;
+								
+						    }
+							else if (i+1 == Archivos.size()) {
+								System.out.println("estoy en else if");
+								Archivos.add (auxiliar);
+								break;
+								
+							}
+								
+						}
+					}
+					
 					printArchivos (Archivos);
+					repositorio.setWorkspace(Archivos);
 										
 				case 7: 
 					System.out.println("Finalizado");
@@ -76,7 +110,7 @@ public class menu {
 	
 	
 	 
-	   
+	//prints
 	   public static void printArchivos (LinkedList<archivo> Lista) {
 		   
 		   for(int i=0;i < Lista.size();i++) {

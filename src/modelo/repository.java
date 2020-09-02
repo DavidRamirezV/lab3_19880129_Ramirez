@@ -6,14 +6,18 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class repository {
-	private String rama;
-	private String autor;
-	private String fecha;
+	//atributos
+	protected String rama;
+	protected String autor;
+	protected String fecha;
 	static Scanner input = new Scanner(System.in); 
-
-	LinkedList<archivo> Archivos;
-	LinkedList<commit> RemoteRepository;
+	protected LinkedList<archivo> workspace;
 	
+	protected LinkedList<archivo> index;
+	protected LinkedList<commit> localRepository;
+	protected LinkedList<commit> remoteRepository;
+	
+	//Getters y Setters
 	public String getRama() {
 		return rama;
 	}
@@ -31,8 +35,58 @@ public class repository {
 	}
 	public void setRama(String rama) {
 		this.rama = rama;
+	}	
+	//Getters y setters zonas de trabajo
+	public LinkedList<archivo> getWorkspace() {
+		return workspace;
 	}
+	public void setWorkspace(LinkedList<archivo> workspace) {
+		this.workspace = workspace;
+	}
+	public LinkedList<archivo> getIndex() {
+		return index;
+	}
+	public void setIndex(LinkedList<archivo> index) {
+		this.index = index;
+	}
+	public LinkedList<commit> getLocalRepository() {
+		return localRepository;
+	}
+	public void setLocalRepository(LinkedList<commit> localRepository) {
+		this.localRepository = localRepository;
+	}
+	public LinkedList<commit> getRemoteRepository() {
+		return remoteRepository;
+	}
+	public void setRemoteRepository(LinkedList<commit> remoteRepository) {
+		this.remoteRepository = remoteRepository;
+	}
+
+	//otros metodos
+    public void obtenerFecha(){
+        SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        Date fecha = new Date();
+        this.fecha = formato.format(fecha);
+    }
+    
+    public static repository gitInit(){
+	    repository rep = new repository();
+	    System.out.println("Introduce el nombre del autor del repositorio:");
+        rep.setAutor(input.nextLine());	        
+        rep.obtenerFecha();      
+        System.out.println("Introduce la rama actual:");
+        rep.setRama(input.nextLine());
+        
+        rep.setWorkspace(null);
+        rep.setIndex(null);
+        rep.setLocalRepository(null);
+        rep.setRemoteRepository(null);
+        
+        return rep;      	
+   }
 	
+	
+
 	
 	/*
 	 LinkedList<String> ll 
@@ -53,22 +107,4 @@ public class repository {
 	 ll.removeLast(); 
 	
 */
-    public void obtenerFecha(){
-        SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-        Date fecha = new Date();
-        this.fecha = formato.format(fecha);
-    }
-    
-    public static repository gitInit(){
-	    repository rep = new repository();
-	    System.out.println("Introduce el nombre del autor del repositorio:");
-        rep.setAutor(input.nextLine());	        
-        rep.obtenerFecha();      
-        System.out.println("Introduce la rama actual:");
-        rep.setRama(input.nextLine());	           
-        return rep;      	
-   }
-	
-	
-	 
 }

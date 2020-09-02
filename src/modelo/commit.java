@@ -1,7 +1,7 @@
 package modelo;
 
 public class commit {
-	private String comentario;
+	public String comentario;
 	private String fecha;	
 	private String contenido;
 	
