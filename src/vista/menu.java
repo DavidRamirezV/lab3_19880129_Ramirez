@@ -1,10 +1,11 @@
-package modelo;
+package vista;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import modelo.*;
 
 public class menu {
 	//Sacanner sirve para recoger texto por consola
@@ -13,7 +14,7 @@ public class menu {
 	static LinkedList<archivo> Archivos = new LinkedList<archivo>();
 	static repository repositorio = new repository();
 	
-	public static void main(String[] args) {
+	public static void iniciarMenu() {
 		
 		repositorio = repository.gitInit();
 		//Mientras la opción elegida sea 0, preguntamos al usuario
@@ -42,9 +43,7 @@ public class menu {
 					System.out.println("o ingresa el nombre de los archivos separados por una coma (sin espacios)");
 					System.out.println("Ej: \"all\" o \"archivo1.txt,archivo2.in,archivo3.out\" ");	
 					List<String> nombresArchivos = new ArrayList<String>(Arrays.asList(input.nextLine().split(",")));
-					for(int i=0;i < nombresArchivos.size();i++) {
-						System.out.println(nombresArchivos.get(i));		
-					}
+					
 					repositorio.setIndex(workspace.gitAdd(nombresArchivos, repositorio.getWorkspace()) );
 					break;
 					
@@ -67,6 +66,7 @@ public class menu {
 				case 6: 
 					archivo auxiliar = archivo.crearArchivo();
 					//para evitar que existan dos archivos con el mismo nombre
+					//si se crea un archivo con un nombre que ya existe se reemplazara el anterior por el nuevo
 					if (Archivos.size()==0) {
 						Archivos.add (auxiliar);
 					}

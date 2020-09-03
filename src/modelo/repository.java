@@ -9,10 +9,10 @@ public class repository {
 	//atributos
 	protected String rama;
 	protected String autor;
+	protected String nombreRep;
 	protected String fecha;
 	static Scanner input = new Scanner(System.in); 
-	protected LinkedList<archivo> workspace;
-	
+	protected LinkedList<archivo> workspace;	
 	protected LinkedList<archivo> index;
 	protected LinkedList<commit> localRepository;
 	protected LinkedList<commit> remoteRepository;
@@ -29,6 +29,12 @@ public class repository {
 	}
 	public String getFecha() {
 		return fecha;
+	}
+	public String getNombreRep() {
+		return nombreRep;
+	}
+	public void setNombreRep(String nombreRep) {
+		this.nombreRep = nombreRep;
 	}
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
@@ -73,15 +79,15 @@ public class repository {
 	    repository rep = new repository();
 	    System.out.println("Introduce el nombre del autor del repositorio:");
         rep.setAutor(input.nextLine());	        
-        rep.obtenerFecha();      
-        System.out.println("Introduce la rama actual:");
-        rep.setRama(input.nextLine());
-        
+        rep.obtenerFecha();
+        System.out.println("Introduce el nombre del repositorio:");
+        rep.setNombreRep(input.nextLine());
+        rep.setRama("master");	           
         rep.setWorkspace(null);
         rep.setIndex(null);
         rep.setLocalRepository(null);
         rep.setRemoteRepository(null);
-        
+       
         return rep;      	
    }
 	

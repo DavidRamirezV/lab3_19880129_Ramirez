@@ -9,7 +9,7 @@ public class workspace extends repository{
 		LinkedList<archivo> coincidencias= new LinkedList<archivo>() ; 
 		
 		//si se quiere agregar todo (all)
-		if (nombreArchivos.isEmpty()) {
+		if (nombreArchivos.get(0).equals("all")) {
 			for(int i=0;i < workspace.size();i++) {
 				coincidencias.add(workspace.get(i));		
 			}
@@ -17,7 +17,7 @@ public class workspace extends repository{
 		//si la lista no esta vacia agregar la lista de nombres entregados
 		else {		
 			for(int i=0;i < nombreArchivos.size();i++) {
-				for(int j=0;i < workspace.size();j++) {
+				for(int j=0;j < workspace.size();j++) {
 				    if (nombreArchivos.get(i).equals(workspace.get(j).getNombre())) {
 				    	coincidencias.add(workspace.get(j));
 				    }

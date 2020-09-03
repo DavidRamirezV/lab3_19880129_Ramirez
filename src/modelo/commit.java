@@ -1,10 +1,11 @@
 package modelo;
 
+import java.util.LinkedList;
+
 public class commit {
 	public String comentario;
-	private String fecha;	
 	private String contenido;
-	
+	private LinkedList<archivo> archivosCommit;
 
 	public String getComentario() {
 		return comentario;
@@ -14,14 +15,6 @@ public class commit {
 		this.comentario = comentario;
 	}
 
-	public String getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
-
 	public String getContenido() {
 		return contenido;
 	}
@@ -29,6 +22,15 @@ public class commit {
 	public void setContenido(String contenido) {
 		this.contenido = contenido;
 	}
-	
+
+	public LinkedList<archivo> getArchivosCommit() {
+		return archivosCommit;
+	}
+
+	public void setArchivosCommit(LinkedList<archivo> archivosCommit) {
+		this.archivosCommit = archivosCommit;
+	}
+
+
 	
 }

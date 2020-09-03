@@ -6,6 +6,7 @@ public class status extends repository{
 
 		System.out.println("-----------------------------");
 		System.out.println("Autor: " + rep.getAutor());
+		System.out.println("Nombre Repositorio: " + rep.getNombreRep());
 		System.out.println("Rama: " + rep.getRama());
 		System.out.println("Fecha de creacion: " + rep.getFecha());
 		
