@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class repository {
+public abstract class repository {
 	//atributos
 	protected String rama;
 	protected String autor;
@@ -76,7 +76,7 @@ public class repository {
     }
     
     public static repository gitInit(){
-	    repository rep = new repository();
+	    repository rep = new repository() {};
 	    System.out.println("Introduce el nombre del autor del repositorio:");
         rep.setAutor(input.nextLine());	        
         rep.obtenerFecha();

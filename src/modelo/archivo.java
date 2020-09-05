@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
 
@@ -53,6 +54,32 @@ public class archivo {
         return a1;
         	
    }
+    
+    //sobrescribir un archivo en una lista
+    public static void anadirArchivoLista(LinkedList<archivo> Archivos, archivo auxiliar) {
+		if (Archivos.size()==0) {
+			Archivos.add (auxiliar);
+		}
+		
+		else {
+			for(int i=0;i < Archivos.size();i++) {
+				if (auxiliar.getNombre().equals(Archivos.get(i).getNombre())) {
+					System.out.println("estoy en el if");
+					Archivos.set(i,auxiliar);
+					break;
+					
+			    }
+				else if (i+1 == Archivos.size()) {
+					System.out.println("estoy en else if");
+					Archivos.add (auxiliar);
+					break;
+					
+				}
+					
+			}
+		}
+		
+    }
     
 }
 

@@ -12,7 +12,7 @@ public class menu {
 	static Scanner input = new Scanner(System.in); 
 	static int seleccion = -1; //opción elegida del usuario
 	static LinkedList<archivo> Archivos = new LinkedList<archivo>();
-	static repository repositorio = new repository();
+	static repository repositorio = new repository() {};
 	
 	public static void iniciarMenu() {
 		
@@ -39,16 +39,20 @@ public class menu {
 				switch(seleccion){
 				
 				case 1:
-					System.out.println("Seleccionaste add, escribe \"all\" (sin comillas) para añadir todo");	
-					System.out.println("o ingresa el nombre de los archivos separados por una coma (sin espacios)");
-					System.out.println("Ej: \"all\" o \"archivo1.txt,archivo2.in,archivo3.out\" ");	
+					System.out.println("Seleccionaste add, escribe \"all\" (sin comillas) para añadir todo o ");	
+					System.out.println("ingresa el nombre de los archivos separados por una coma (sin espacios):");
+					System.out.println("(Ej:\"all\" o \"archivo1.txt\" o \"archivo1.txt,archivo2.in,archivo3.out\")");	
 					List<String> nombresArchivos = new ArrayList<String>(Arrays.asList(input.nextLine().split(",")));
 					
 					repositorio.setIndex(workspace.gitAdd(nombresArchivos, repositorio.getWorkspace()) );
 					break;
 					
 				case 2: 
-					System.out.println("Aqui va giCommit");
+					//REPARAR!!!!!!!!!!!!!!
+					System.out.println("Escribe un mensaje descriptivo para el commit: ");
+					repositorio.setLocalRepository(index.gitCommit(input.nextLine(),repositorio));
+					
+					
 					break;
 					
 				case 3: 
@@ -67,28 +71,7 @@ public class menu {
 					archivo auxiliar = archivo.crearArchivo();
 					//para evitar que existan dos archivos con el mismo nombre
 					//si se crea un archivo con un nombre que ya existe se reemplazara el anterior por el nuevo
-					if (Archivos.size()==0) {
-						Archivos.add (auxiliar);
-					}
-					
-					else {
-						for(int i=0;i < Archivos.size();i++) {
-							if (auxiliar.getNombre().equals(Archivos.get(i).getNombre())) {
-								System.out.println("estoy en el if");
-								Archivos.set(i,auxiliar);
-								break;
-								
-						    }
-							else if (i+1 == Archivos.size()) {
-								System.out.println("estoy en else if");
-								Archivos.add (auxiliar);
-								break;
-								
-							}
-								
-						}
-					}
-					
+					archivo.anadirArchivoLista(Archivos, auxiliar);
 					printArchivos (Archivos);
 					repositorio.setWorkspace(Archivos);
 										
