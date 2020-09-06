@@ -7,16 +7,16 @@ import java.util.LinkedList;
 import java.util.List;
 import modelo.*;
 
-public class menu {
+public class Menu {
 	//Sacanner sirve para recoger texto por consola
 	static Scanner input = new Scanner(System.in); 
 	static int seleccion = -1; //opción elegida del usuario
-	static LinkedList<archivo> Archivos = new LinkedList<archivo>();
-	static repository repositorio = new repository() {};
+	static LinkedList<Archivo> Archivos = new LinkedList<Archivo>();
+	static Repository repositorio = new Repository() {};
 	
 	public static void iniciarMenu() {
 		
-		repositorio = repository.gitInit();
+		repositorio = Repository.gitInit();
 		//Mientras la opción elegida sea 0, preguntamos al usuario
 		while(seleccion != 7){
 			//Try catch para evitar que el programa termine si hay un error
@@ -26,8 +26,8 @@ public class menu {
 						"### SIMULACIÓN DE GIT ###\r\n" +
 						"1. add\r\n" + 
 						"2. commit\r\n" + 
-						"3. pull\r\n" + 
-						"4. push\r\n" + 
+						"3. push\r\n" + 
+						"4. pull\r\n" + 
 						"5. status\r\n" + 
 						"6. Crear nuevo archivo \r\n" +
 						"7. Salir \r\n" + 
@@ -44,43 +44,43 @@ public class menu {
 					System.out.println("(Ej:\"all\" o \"archivo1.txt\" o \"archivo1.txt,archivo2.in,archivo3.out\")");	
 					List<String> nombresArchivos = new ArrayList<String>(Arrays.asList(input.nextLine().split(",")));
 					
-					repositorio.setIndex(workspace.gitAdd(nombresArchivos, repositorio.getWorkspace()) );
+					repositorio.setIndex(Workspace.gitAdd(nombresArchivos, repositorio.getWorkspace()) );
 					break;
 					
 				case 2: 
-					//REPARAR!!!!!!!!!!!!!!
 					System.out.println("Escribe un mensaje descriptivo para el commit: ");
-					repositorio.setLocalRepository(index.gitCommit(input.nextLine(),repositorio));
-					
-					
+					repositorio.setLocalRepository(Index.gitCommit(input.nextLine(),repositorio));
+					repositorio.setIndex(null);
 					break;
 					
 				case 3: 
-					System.out.println("Aqui va giPull");
+					repositorio.setRemoteRepository(LocalRepository.gitPush(repositorio));
 					break;
 					
 				case 4: 
-					System.out.println("Aqui va gitPush");
+					System.out.println("Aqui va gitPull");
 					break;
 					
 				case 5: 
-					status.gitStatus(repositorio);
+					Status.gitStatus(repositorio);
 					break;
 					
 				case 6: 
-					archivo auxiliar = archivo.crearArchivo();
+					Archivo auxiliar = Archivo.crearArchivo();
 					//para evitar que existan dos archivos con el mismo nombre
 					//si se crea un archivo con un nombre que ya existe se reemplazara el anterior por el nuevo
-					archivo.anadirArchivoLista(Archivos, auxiliar);
+					Archivo.anadirArchivoLista(Archivos, auxiliar);
 					printArchivos (Archivos);
 					repositorio.setWorkspace(Archivos);
+					break;
 										
 				case 7: 
 					System.out.println("Finalizado");
 					break;
 					
 				default:
-					System.out.println("Número no reconocido");break;
+					System.out.println("Número no reconocido");
+					break;
 				}
 				
 			}catch(Exception s){
@@ -94,7 +94,7 @@ public class menu {
 	
 	 
 	//prints
-	   public static void printArchivos (LinkedList<archivo> Lista) {
+	   public static void printArchivos (LinkedList<Archivo> Lista) {
 		   
 		   for(int i=0;i < Lista.size();i++) {
 			    System.out.println("\r\n------------------------------------");

@@ -1,8 +1,8 @@
 package modelo;
 
-public class local_rep extends repository{
+public class RemoteRepository extends Repository {
 	private String comentario;
-	private commit Commit;
+	private Commit Commit;
 	
 	public String getComentario() {
 		return comentario;
@@ -11,10 +11,10 @@ public class local_rep extends repository{
 		this.comentario = comentario;
 	}
 	
-	public commit getCommit() {
+	public Commit getCommit() {
 		return Commit;
 	}
-	public void setCommit(commit commit) {
+	public void setCommit(Commit commit) {
 		Commit = commit;
 	}
 }

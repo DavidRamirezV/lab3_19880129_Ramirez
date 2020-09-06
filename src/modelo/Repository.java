@@ -5,17 +5,17 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public abstract class repository {
+public abstract class Repository {
 	//atributos
 	protected String rama;
 	protected String autor;
 	protected String nombreRep;
 	protected String fecha;
 	static Scanner input = new Scanner(System.in); 
-	protected LinkedList<archivo> workspace;	
-	protected LinkedList<archivo> index;
-	protected LinkedList<commit> localRepository;
-	protected LinkedList<commit> remoteRepository;
+	protected LinkedList<Archivo> workspace;	
+	protected LinkedList<Archivo> index;
+	protected LinkedList<Commit> localRepository;
+	protected LinkedList<Commit> remoteRepository;
 	
 	//Getters y Setters
 	public String getRama() {
@@ -43,28 +43,28 @@ public abstract class repository {
 		this.rama = rama;
 	}	
 	//Getters y setters zonas de trabajo
-	public LinkedList<archivo> getWorkspace() {
+	public LinkedList<Archivo> getWorkspace() {
 		return workspace;
 	}
-	public void setWorkspace(LinkedList<archivo> workspace) {
+	public void setWorkspace(LinkedList<Archivo> workspace) {
 		this.workspace = workspace;
 	}
-	public LinkedList<archivo> getIndex() {
+	public LinkedList<Archivo> getIndex() {
 		return index;
 	}
-	public void setIndex(LinkedList<archivo> index) {
+	public void setIndex(LinkedList<Archivo> index) {
 		this.index = index;
 	}
-	public LinkedList<commit> getLocalRepository() {
+	public LinkedList<Commit> getLocalRepository() {
 		return localRepository;
 	}
-	public void setLocalRepository(LinkedList<commit> localRepository) {
+	public void setLocalRepository(LinkedList<Commit> localRepository) {
 		this.localRepository = localRepository;
 	}
-	public LinkedList<commit> getRemoteRepository() {
+	public LinkedList<Commit> getRemoteRepository() {
 		return remoteRepository;
 	}
-	public void setRemoteRepository(LinkedList<commit> remoteRepository) {
+	public void setRemoteRepository(LinkedList<Commit> remoteRepository) {
 		this.remoteRepository = remoteRepository;
 	}
 
@@ -75,8 +75,8 @@ public abstract class repository {
         this.fecha = formato.format(fecha);
     }
     
-    public static repository gitInit(){
-	    repository rep = new repository() {};
+    public static Repository gitInit(){
+	    Repository rep = new Repository() {};
 	    System.out.println("Introduce el nombre del autor del repositorio:");
         rep.setAutor(input.nextLine());	        
         rep.obtenerFecha();

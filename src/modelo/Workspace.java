@@ -3,10 +3,10 @@ package modelo;
 import java.util.LinkedList;
 import java.util.List;
 
-public class workspace extends repository{
+public class Workspace extends Repository{
 	
-	public static LinkedList<archivo> gitAdd (List<String> nombreArchivos, LinkedList<archivo> workspace) {
-		LinkedList<archivo> coincidencias= new LinkedList<archivo>() ; 
+	public static LinkedList<Archivo> gitAdd (List<String> nombreArchivos, LinkedList<Archivo> workspace) {
+		LinkedList<Archivo> coincidencias= new LinkedList<Archivo>() ; 
 		
 		//si se quiere agregar todo (all)
 		if (nombreArchivos.get(0).equals("all")) {

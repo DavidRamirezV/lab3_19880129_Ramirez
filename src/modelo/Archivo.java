@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
 
-public class archivo {
+public class Archivo {
 	//modulo de atributos
 	private String nombre;	
 	private String fecha;	
@@ -44,8 +44,8 @@ public class archivo {
         this.fecha = formato.format(fecha);
     }
        
-    public static archivo crearArchivo(){
-	    archivo a1 = new archivo();
+    public static Archivo crearArchivo(){
+	    Archivo a1 = new Archivo();
 	    System.out.println("Introduce el nombre del archivo:");
         a1.setNombre(input.nextLine());	        
         a1.obtenerFecha();	        
@@ -56,7 +56,7 @@ public class archivo {
    }
     
     //sobrescribir un archivo en una lista
-    public static void anadirArchivoLista(LinkedList<archivo> Archivos, archivo auxiliar) {
+    public static void anadirArchivoLista(LinkedList<Archivo> Archivos, Archivo auxiliar) {
 		if (Archivos.size()==0) {
 			Archivos.add (auxiliar);
 		}
@@ -64,13 +64,11 @@ public class archivo {
 		else {
 			for(int i=0;i < Archivos.size();i++) {
 				if (auxiliar.getNombre().equals(Archivos.get(i).getNombre())) {
-					System.out.println("estoy en el if");
 					Archivos.set(i,auxiliar);
 					break;
 					
 			    }
 				else if (i+1 == Archivos.size()) {
-					System.out.println("estoy en else if");
 					Archivos.add (auxiliar);
 					break;
 					
