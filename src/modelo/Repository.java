@@ -80,7 +80,7 @@ public class Repository {
      *para guardarlo en el atributo "fecha" de la clase Repository.
      */
     public void obtenerFecha(){
-        SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date fecha = new Date();
         this.fecha = formato.format(fecha);
     }

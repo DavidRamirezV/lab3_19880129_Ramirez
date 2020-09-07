@@ -35,7 +35,7 @@ public class Index extends Repository{
         	}
         }
         
-        Commit nuevoCommit = new Commit(mensaje,archivosRepositorio);        
+        Commit nuevoCommit = new Commit(mensaje,rep.getIndex(),archivosRepositorio);
         LinkedList<Commit> nuevoLocal = new LinkedList<Commit>();
         if(rep.getLocalRepository() == null || rep.getLocalRepository().size() == 0){
         	nuevoLocal.add(nuevoCommit);

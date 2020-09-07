@@ -2,7 +2,7 @@ package vista;
 
 import modelo.*;
 
-/** Esta clase representa a gitStatus, es parte del package vista debido a que solo se utliara
+/** Esta clase representa a gitStatus, es parte del package vista debido a que solo se utilizara
  * para imprimir por consola el estado actual de un repositorio
  * mostrando: 
  * (i) Información del repositorio (nombre y autor)
@@ -60,10 +60,10 @@ public class Status{
 	    System.out.println("-------LOCAL REPOSITORY-------");
 	    
 	    if(rep.getLocalRepository() == null || rep.getLocalRepository().size() == 0){
-	    	System.out.println("Cantidad de Commits LR: 0");
+	    	System.out.println("Cantidad de Commits: 0");
 	    }
 	    else {
-	    	System.out.println("Cantidad de Commits LR: " + rep.getLocalRepository().size());
+	    	System.out.println("Cantidad de Commits: " + rep.getLocalRepository().size());
 	    	for (int i=0; i<rep.getLocalRepository().size();i++) {
 	    		System.out.println(rep.getLocalRepository().get(i).getComentario());
 	    	}
@@ -71,10 +71,10 @@ public class Status{
 	    
 	    System.out.println("------REMOTE REPOSITORY-------");
 	    if(rep.getRemoteRepository() == null || rep.getRemoteRepository().size() == 0){
-	    	System.out.println("Cantidad de Commits RR: 0");
+	    	System.out.println("Cantidad de Commits: 0");
 	    }
 	    else {
-	    	System.out.println("Cantidad de Commits RR: " + rep.getRemoteRepository().size());
+	    	System.out.println("Cantidad de Commits: " + rep.getRemoteRepository().size());
 	    	for (int i=0; i<rep.getRemoteRepository().size();i++) {
 	    		System.out.println(rep.getRemoteRepository().get(i).getComentario());
 	    	}

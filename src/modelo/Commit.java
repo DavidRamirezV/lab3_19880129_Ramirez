@@ -1,5 +1,7 @@
 package modelo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -12,25 +14,36 @@ import java.util.LinkedList;
 public class Commit {
 	//ATRIBUTOS
 	public String comentario;
+	public String fecha;
+	private LinkedList<Archivo> archivosEditados;
 	private LinkedList<Archivo> archivosCommit;
 	
 	//Getters y Setters
 	public String getComentario() {
 		return comentario;
 	}
-
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+	public LinkedList<Archivo> getArchivosEditados() {
+		return archivosEditados;
+	}
+	public void setArchivosEditados(LinkedList<Archivo> archivosEditados) {
+		this.archivosEditados = archivosEditados;
+	}
 	public LinkedList<Archivo> getArchivosCommit() {
 		return archivosCommit;
 	}
-
 	public void setArchivosCommit(LinkedList<Archivo> archivosCommit) {
 		this.archivosCommit = archivosCommit;
 	}
-	
+
 	//METODOS
 	//Constructor
 	/**
@@ -42,14 +55,27 @@ public class Commit {
 	/**
 	 * Constructor de la clase Commit.
 	 * @param comentario - String que representa un pequeño mensaje del usuario
-	 * @param archivosCommit - Lista enlazada de Archivos
+	 * @param archivosEditados - Lista enlazada de Archivos con archivos que fueron editados
+	 * @param archivosCommit - Lista enlazada de Archivos con todos los archivos actuales
 	 */
-	public Commit(String comentario,LinkedList<Archivo> archivosCommit ){
+	public Commit(String comentario,LinkedList<Archivo> archivosEditados,LinkedList<Archivo> archivosCommit ){
 		this.comentario = comentario;
+		this.obtenerFecha();
+		this.archivosEditados = archivosEditados;
 		this.archivosCommit = archivosCommit;
 	}
 	
 	
+    /**
+     *Metodo para obtener la fecha y hora actual al equipo y transformarlo a String
+     *para guardarlo en el atributo "fecha" de la clase Commit.
+     */
+    public void obtenerFecha(){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date fecha = new Date();
+        this.fecha = formato.format(fecha);
+    }
+    
 	/** 
 	 * Metodo que compara si dos listas enlazadas con elementos del tipo Commit son exactamente iguales.
 	 * @param L1 - Lista enlazada de Commits
