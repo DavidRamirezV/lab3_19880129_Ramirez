@@ -2,57 +2,50 @@ package modelo;
 
 import java.util.LinkedList;
 
+/**
+ * Clase que hereda de Repository que representa la zona de trabajo Index, se utliza para implementar los metodos relacionados
+ * a Index y asi mantener alta la cohesion de la clase Repository.
+ * @author David Ramirez
+ *
+ */
 public class Index extends Repository{
 		
-		
+	//METODOS
+	/**Metodo que se encarga de agregar un nuevo Commit a Local Repository.
+	 * 
+	 * @param mensaje - String con un mensaje sobre los cambios que hara el usuario
+	 * @param rep - Repository que representa el repositorio actual
+	 * @return Lista enlazada de Commits, esta representa un nuevo Local Repository con los cambios añadidos
+	 */
 	public static LinkedList<Commit> gitCommit (String mensaje,Repository rep){
-		//creo la lista de archivos
+		
         LinkedList<Archivo> archivosRepositorio = new LinkedList<Archivo>();
         
         if (rep.getRemoteRepository() == null || rep.getRemoteRepository().size() == 0 ) {
-        	for (int i = 0; i< rep.getIndex().size();i++) {
-        		System.out.println("anadir o reemplazar " + rep.getIndex().get(i).getNombre());
+        	for (int i = 0; i< rep.getIndex().size();i++) {        		
         		Archivo.anadirArchivoLista(archivosRepositorio, rep.getIndex().get(i));
-        	}        	
-        	System.out.println("########IF");
-        }
-        
-        else {
-        	System.out.println("########ELSE");
+        	}               	
+        }        
+        else {        	
         	for (int i=0; i<rep.getRemoteRepository().getLast().getArchivosCommit().size();i++) {
         		archivosRepositorio.add(rep.getRemoteRepository().getLast().getArchivosCommit().get(i));
-        		System.out.println("anadir " + rep.getRemoteRepository().getLast().getArchivosCommit().get(i).getNombre());
         	}
         	for (int i = 0; i< rep.getIndex().size();i++) {
-        		System.out.println("anadir o reemplazar" + rep.getIndex().get(i).getNombre());
-        		Archivo.anadirArchivoLista(archivosRepositorio, rep.getIndex().get(i));
+        		Archivo.anadirArchivoLista(archivosRepositorio, rep.getIndex().get(i));	
         	}
         }
         
-        System.out.println("ARCHIVOS ANTES DE AGREGAR AL COMMIT:");
-        for (int i=0 ;i < archivosRepositorio.size();i++ ) {
-        	System.out.println(archivosRepositorio.get(i).getNombre());
-        }
-
-        
-        Commit nuevoCommit = new Commit(mensaje,archivosRepositorio);
-        System.out.println("MENSAJE:" + nuevoCommit.getComentario());
-        System.out.println("IMPRIMIR LISTA DE ARCHIVOS EN EL COMMIT:");
-        for (int i=0 ;i < archivosRepositorio.size();i++ ) {
-        	System.out.println(nuevoCommit.getArchivosCommit().get(i).getNombre());
-        }
-        
+        Commit nuevoCommit = new Commit(mensaje,archivosRepositorio);        
         LinkedList<Commit> nuevoLocal = new LinkedList<Commit>();
         if(rep.getLocalRepository() == null || rep.getLocalRepository().size() == 0){
-        	nuevoLocal.add(nuevoCommit);	    	
+        	nuevoLocal.add(nuevoCommit);
 	    }
         else {
         	 nuevoLocal.addAll(rep.getLocalRepository());
              nuevoLocal.add(nuevoCommit);
         }
-        System.out.println("vvvvvvvv todo ok vvvvvvvvv");
-        return nuevoLocal;
         
+        return nuevoLocal; 
 	}
 	
 }

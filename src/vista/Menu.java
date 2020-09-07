@@ -7,16 +7,33 @@ import java.util.LinkedList;
 import java.util.List;
 import modelo.*;
 
+/** Esta clase representa una interfaz por consola que permite al usuario
+ * interactuar con el resto del codigo.
+ * @author David Ramirez
+ *
+ */
 public class Menu {
-	//Sacanner sirve para recoger texto por consola
+	//Scanner sirve para recoger texto por consola
 	static Scanner input = new Scanner(System.in); 
 	static int seleccion = -1; //opción elegida del usuario
 	static LinkedList<Archivo> Archivos = new LinkedList<Archivo>();
 	static Repository repositorio = new Repository() {};
 	
+	
+	/**
+	 * Este metodo se encarga de inicializar el repositorio 
+	 * y de mostrar al usuario metodos para poder interactuar con el codigo
+	 * consultandole al usuario ¿que es lo que desea hacer? y consultando
+	 * los parametros que se necesiten para utilizar ciertos metodos.
+	 */
 	public static void iniciarMenu() {
+
+	    System.out.println("Introduce el nombre del autor del repositorio:");
+	    String autor = input.nextLine();
+        System.out.println("Introduce el nombre del repositorio:");
+        String nombreRepositorio = input.nextLine();        
+		repositorio = Repository.gitInit(autor,nombreRepositorio);
 		
-		repositorio = Repository.gitInit();
 		//Mientras la opción elegida sea 0, preguntamos al usuario
 		while(seleccion != 7){
 			//Try catch para evitar que el programa termine si hay un error
@@ -53,12 +70,16 @@ public class Menu {
 					repositorio.setIndex(null);
 					break;
 					
-				case 3: 
+				case 3:					
 					repositorio.setRemoteRepository(LocalRepository.gitPush(repositorio));
+					System.out.println("Se ha realizado un Push");
 					break;
 					
 				case 4: 
-					System.out.println("Aqui va gitPull");
+					repositorio.setWorkspace(RemoteRepository.gitPull(repositorio));
+					Archivos.clear();
+					Archivos.addAll(repositorio.getWorkspace());
+					System.out.println("Se ha realizado un Pull");
 					break;
 					
 				case 5: 
@@ -66,16 +87,23 @@ public class Menu {
 					break;
 					
 				case 6: 
-					Archivo auxiliar = Archivo.crearArchivo();
+									
+					System.out.println("Introduce el nombre del archivo:");
+					String nombre = input.nextLine();
+					System.out.println("Introduce el contenido:");
+					String contenido = input.nextLine();
+					
+					Archivo auxiliar =  new Archivo(nombre,contenido);
 					//para evitar que existan dos archivos con el mismo nombre
-					//si se crea un archivo con un nombre que ya existe se reemplazara el anterior por el nuevo
-					Archivo.anadirArchivoLista(Archivos, auxiliar);
-					printArchivos (Archivos);
-					repositorio.setWorkspace(Archivos);
+					//si se crea un archivo con un nombre que ya existe se reemplazara el anterior por el nuevo					
+					Archivo.anadirArchivoLista(Archivos, auxiliar);					
+					repositorio.setWorkspace(Archivos);					
+					printArchivos (repositorio.getWorkspace());
 					break;
 										
 				case 7: 
 					System.out.println("Finalizado");
+					input.close();
 					break;
 					
 				default:
@@ -93,8 +121,12 @@ public class Menu {
 	
 	
 	 
-	//prints
-	   public static void printArchivos (LinkedList<Archivo> Lista) {
+	
+	/**
+	 * Imprime una Lista de Archivos por pantalla.
+	 * @param Lista - Lista de clases Archivo
+	 */
+	public static void printArchivos (LinkedList<Archivo> Lista) {
 		   
 		   for(int i=0;i < Lista.size();i++) {
 			    System.out.println("\r\n------------------------------------");
@@ -103,7 +135,8 @@ public class Menu {
 				System.out.println(Lista.get(i).getContenido().toString());
 		   }
 		   System.out.println("------------------------------------\r\n");
-	   }
+	}
+	
 	    
 
 }

@@ -5,8 +5,14 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
 
+/**
+ * TDA de Archivo, tiene un String nombre del archivo, un String fecha de creacion
+ * y un String que representa el contenido del archivo.
+ * @author David Ramirez
+ *
+ */
 public class Archivo {
-	//modulo de atributos
+	//ATRIBUTOS
 	private String nombre;	
 	private String fecha;	
 	private String contenido;
@@ -37,39 +43,58 @@ public class Archivo {
 	}
 	
 	
-	//Funciones
+	//METODOS
+	
+   
+    //Constructor
+    /**
+     * Constructor de la clase Archivo.
+     * 
+     */
+    public Archivo() {
+	}
+    /**
+     * Constructor de la clase Archivo.
+     * @param nombre - String con un nombre del Archivo
+     * @param contenido - String con el contenido del Archivo
+     */
+    public Archivo (String nombre,String contenido){
+	    
+        this.setNombre(nombre);	        
+        this.obtenerFecha();	                
+        this.setContenido(contenido);	     
+    }
+    
+    /**
+     *Metodo para obtener la fecha y hora actual al equipo y transformarlo a String
+     *para guardarlo en el atributo "fecha" de la clase Archivo.
+     */
     public void obtenerFecha(){
         SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         Date fecha = new Date();
         this.fecha = formato.format(fecha);
     }
-       
-    public static Archivo crearArchivo(){
-	    Archivo a1 = new Archivo();
-	    System.out.println("Introduce el nombre del archivo:");
-        a1.setNombre(input.nextLine());	        
-        a1.obtenerFecha();	        
-        System.out.println("Introduce el contenido:");
-        a1.setContenido(input.nextLine());	           
-        return a1;
-        	
-   }
     
-    //sobrescribir un archivo en una lista
-    public static void anadirArchivoLista(LinkedList<Archivo> Archivos, Archivo auxiliar) {
-		if (Archivos.size()==0) {
-			Archivos.add (auxiliar);
+
+    /** Metodo para anadir un archivo a una lista enlazada de archivos o sobrescribirlo en caso
+     * de que este archivo ya existiera en la lista enlazada.
+     * @param Lista - lista enlazada con elementos del tipo clase Archivo
+     * @param archivo - elemento del tipo clase Archivo
+     */
+    public static void anadirArchivoLista(LinkedList<Archivo> Lista, Archivo archivo) {
+		if (Lista.size()==0 || Lista == null) {
+			Lista.add (archivo);
 		}
 		
 		else {
-			for(int i=0;i < Archivos.size();i++) {
-				if (auxiliar.getNombre().equals(Archivos.get(i).getNombre())) {
-					Archivos.set(i,auxiliar);
+			for(int i=0;i < Lista.size();i++) {
+				if (archivo.getNombre().equals(Lista.get(i).getNombre())) {
+					Lista.set(i,archivo);
 					break;
 					
 			    }
-				else if (i+1 == Archivos.size()) {
-					Archivos.add (auxiliar);
+				else if (i+1 == Lista.size()) {
+					Lista.add (archivo);
 					break;
 					
 				}
@@ -78,6 +103,7 @@ public class Archivo {
 		}
 		
     }
+    
     
 }
 

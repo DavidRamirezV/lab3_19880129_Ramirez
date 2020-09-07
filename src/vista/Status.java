@@ -1,10 +1,32 @@
-package modelo;
+package vista;
 
+import modelo.*;
+
+/** Esta clase representa a gitStatus, es parte del package vista debido a que solo se utliara
+ * para imprimir por consola el estado actual de un repositorio
+ * mostrando: 
+ * (i) Información del repositorio (nombre y autor)
+ * (ii) Número de archivos en el Workspace
+ * (iii) Número de archivos en el Index
+ * (iv) Número de commits en el Local Repository
+ * (v) SI el Remote Repository está al día (o no) con los cambios del Local Repository.
+ * @author David Ramirez
+ *
+ */
 public class Status{
 	
+    /**Metodo que imprime por consola el estado actual de un repositorio
+ 	 * mostrando: 
+ 	 * (i) Información del repositorio (nombre y autor)
+ 	 * (ii) Número de archivos en el Workspace
+ 	 * (iii) Número de archivos en el Index
+ 	 * (iv) Número de commits en el Local Repository
+ 	 * (v) SI el Remote Repository está al día (o no) con los cambios del Local Repository.
+	 * @param rep - Repository que sera imprimido por pantalla
+	 */
 	public static void gitStatus(Repository rep) {
 
-		System.out.println("-----------------------------");
+		System.out.println("############ STATUS ############");
 		System.out.println("Autor: " + rep.getAutor());
 		System.out.println("Nombre Repositorio: " + rep.getNombreRep());
 		System.out.println("Rama: " + rep.getRama());
@@ -63,7 +85,8 @@ public class Status{
 	    else {
 	    	System.out.println("Remote Repository NO esta al dia");
 	    }
-	    System.out.println("------------------------------");
+	    
+	    System.out.println("################################"+System.lineSeparator());
 	    
 		   
 	
