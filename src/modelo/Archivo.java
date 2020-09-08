@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.Scanner;
 import java.text.SimpleDateFormat;
 
 /**
@@ -16,8 +15,7 @@ public class Archivo {
 	private String nombre;	
 	private String fecha;	
 	private String contenido;
-	static Scanner input = new Scanner(System.in); 
-	
+
 	
 	//Getters y Setters
 	
